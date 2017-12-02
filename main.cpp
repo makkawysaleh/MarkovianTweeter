@@ -86,7 +86,7 @@ int main() {
                 cout << endl;
             }
             catch (const std::invalid_argument &e) {
-                cout << "No such user or user is private! Please try a new user!" << endl;
+                cout << "No such user or user has no tweets! Please try a new user!" << endl;
             }
         }
     } catch(const::std::invalid_argument &e) {

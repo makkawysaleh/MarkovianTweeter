@@ -90,18 +90,22 @@ std::vector<string> TwitterClient::get_tweets(const string &username, const stri
     // Add header and make a get request
     string response = curl->get(search_url, headers);
 
+    if(response == "[]") {
+        throw std::invalid_argument("No such user!");
+    }
+
     // Parse our string as JSON
     json json_response = json::parse(response);
 
     // Check if the response contains any errors!
     auto has_errors = json_response.find("errors");
+    auto has_error = json_response.find("error");
 
-    // If no errors then continue with the reponse
-    if (!(has_errors != json_response.end())) {
+    // If no errors then continue with the response
+    if (!(has_errors != json_response.end()) and !(has_error != json_response.end())) {
 
         // A vector to hold tweet from a user
         std::vector<string> tweets;
-
         // Extract the text portion of the tweet and push it to our vector
         for (auto &element : json_response) {
             auto text = element.find("full_text");
