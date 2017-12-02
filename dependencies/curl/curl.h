@@ -12,7 +12,10 @@
 #include <curl/curl.h>
 #include <map>
 
-using namespace std;
+using std::string;
+using std::map;
+using std::cout;
+using std::endl;
 
 class Curl {
 

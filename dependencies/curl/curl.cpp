@@ -6,8 +6,6 @@
 
 #include "curl.h"
 
-using namespace std; 
-
 // Constructor
 Curl::Curl() = default;
 
