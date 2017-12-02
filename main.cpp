@@ -8,8 +8,7 @@ using std::string;
 
 using namespace std;
 
-int main()
-{
+int main() {
     // Get tweets for a given user and parse their tweets into a vector of words
     auto *client = new TwitterClient();
     string token = client->get_token("IkNpQ7rLdd2XBpx6TlI7QdviF", "tSiFZvRLVdNARZ9JqYxoZcIGgaiHpNJWxwZE0tAlloxr7rk3Td");
