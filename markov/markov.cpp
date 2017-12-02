@@ -1,9 +1,6 @@
 #include "../twitter/twitter_client.h"
 #include "markov.h"
 
-using Prefix = std::deque<std::string>;
-using Suffixes = std::vector<std::string>;
-
 // Add word to suffix deque, update prefix
 void Markov::add(Prefix &prefix, const string &s) {
     if (prefix.size() == NPREF) {

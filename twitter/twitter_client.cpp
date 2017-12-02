@@ -111,17 +111,3 @@ std::vector<string> TwitterClient::make_wordlist(std::vector<string> tweets) {
     // Return our word vector
     return words;
 }
-
-/*
- *  TODO: Add username verification
-    string username_url = "https://twitter.com/users/username_available?username=" + handle;
-    auto curly = new Curl();
-
-    // Construct our headers map
-    map<string, string> userhead;
-
-    // Populate the header map with our bearer token
-    userhead["none"] = "none";
-    string username_response = curly->get(username_url, userhead);
-    json json_username_response = json::parse(username_response);
- */
