@@ -4,8 +4,8 @@
 // New changes made by me include adding support for headers in GET requests and removing redundant get and post methods not
 // used by this program
 
-#ifndef barbeque_h
-#define barbeque_h
+#ifndef CURL_H
+#define CURL_H
 
 #include <iostream>
 #include <string>

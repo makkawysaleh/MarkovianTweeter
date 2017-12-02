@@ -4,9 +4,9 @@
 // Taken and modified from https://stackoverflow.com/questions/4081662/explain-markov-chain-algorithm-in-laymans-terms
 //
 
-#include "../twitter/twitter_client.h"
 #include "markov.h"
 
+using std::string;
 // Add word to suffix deque, update prefix
 void Markov::add(Prefix &prefix, const string &s) {
     if (prefix.size() == NPREF) {

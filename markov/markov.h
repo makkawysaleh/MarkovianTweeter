@@ -15,9 +15,11 @@
 #include <memory>
 #include <functional>
 #include <regex>
+#include <map>
 
 using Prefix = std::deque<std::string>;
 using Suffixes = std::vector<std::string>;
+using std::string;
 
 class Markov {
 
