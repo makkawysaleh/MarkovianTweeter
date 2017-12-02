@@ -35,7 +35,7 @@ string Curl::get(string &url, map<string, string> &headers_map)
     // This is how libcurl natively stores headers
     struct curl_slist *headers = nullptr;
 
-    // Iterate through headers map and construct the headers string from it.
+    // Iterate through headers map and construct the headers string from it
     for (auto &itr : headers_map)
         headers_data.append(itr.first + ": "+ itr.second);
 
@@ -43,6 +43,7 @@ string Curl::get(string &url, map<string, string> &headers_map)
     {
         // Construct our headers
         headers = curl_slist_append(headers, headers_data.c_str());
+
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
@@ -84,11 +85,11 @@ string Curl::post(string &url, map<string, string> &params, map<string, string> 
 
     string readBuffer;
 
-    // Iterate through parameters map and construct a string from it.
+    // Iterate through parameters map and construct a string from it
     for (auto &param : params)
         parameters.append(param.first + "=" + param.second + "&");
 
-    // Iterate through headers map and construct the headers string from it.
+    // Iterate through headers map and construct the headers string from it
     for (auto &itr : headers_map)
         headers_data.append(itr.first + ": "+ itr.second);
 

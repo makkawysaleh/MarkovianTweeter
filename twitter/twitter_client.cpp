@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <map>
+#include <regex>
 #include "twitter_client.h"
 #include "../dependencies/curl/curl.h"
 #include "../dependencies/base64/base64.hpp"
@@ -92,3 +93,35 @@ std::vector<string> TwitterClient::get_tweets(const string &handle, const string
     // Return a vector full of tweets
     return tweets;
 }
+
+std::vector<string> TwitterClient::make_wordlist(std::vector<string> tweets) {
+
+    std::vector<string> words; // Create vector to hold our words
+    for (auto &i : tweets) {
+        string buf; // Have a buffer string
+        std::stringstream ss(i); // Insert the string into a stream
+
+        // Add words while avoiding links.
+        while (ss >> buf)
+            if (buf.find("http") == std::string::npos) {
+                words.push_back(buf);
+            }
+    }
+
+    // Return our word vector
+    return words;
+}
+
+/*
+ *  TODO: Add username verification
+    string username_url = "https://twitter.com/users/username_available?username=" + handle;
+    auto curly = new Curl();
+
+    // Construct our headers map
+    map<string, string> userhead;
+
+    // Populate the header map with our bearer token
+    userhead["none"] = "none";
+    string username_response = curly->get(username_url, userhead);
+    json json_username_response = json::parse(username_response);
+ */

@@ -15,6 +15,7 @@ class TwitterClient {
 public:
     std::string get_token(const string &key, const string &secret);
     std::vector<string> get_tweets(const string &handle, const string &token);
+    std::vector<string> make_wordlist(std::vector<string> tweets);
 };
 
 #endif //MARKOTWEET_TWITTER_CLIENT_H
