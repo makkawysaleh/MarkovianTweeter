@@ -1,3 +1,9 @@
+//
+// Created by Dikshant Adhikari on 12/2/17.
+// File with implementation details for methods used to generate text via Markov chains
+// Taken and modified from https://stackoverflow.com/questions/4081662/explain-markov-chain-algorithm-in-laymans-terms
+//
+
 #include "../twitter/twitter_client.h"
 #include "markov.h"
 
@@ -25,11 +31,13 @@ std::vector<string> Markov::generate(int nwords) {
 
     std::vector<string> markov_words;
 
+    std::srand(static_cast<unsigned int>(std::time(0)));
+
     for (i = 0; i < NPREF; i++)
         add(prefix, NONWORD);
     for (i = 0; i < nwords; i++) {
         std::vector<string> &suf = state_map[prefix];
-        const string &w = suf[rand() % suf.size()];
+        const string &w = suf[std::rand() % suf.size()];
         if (w == NONWORD)
             break;
         markov_words.push_back(w);

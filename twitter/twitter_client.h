@@ -17,7 +17,7 @@ public:
     std::string get_token(const string &key, const string &secret);
 
     // Get tweets for a given user
-    std::vector<string> get_tweets(const string &handle, const string &token);
+    std::vector<string> get_tweets(const string &username, const string &token);
 
     // Make a vector of words from a user's past tweets
     std::vector<string> make_word_list(std::vector<string> tweets);

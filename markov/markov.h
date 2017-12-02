@@ -1,5 +1,7 @@
 //
 // Created by Dikshant Adhikari on 12/2/17.
+// A class that defines methods for generating text via Markov chain
+// Taken and modified from https://stackoverflow.com/questions/4081662/explain-markov-chain-algorithm-in-laymans-terms
 //
 
 #ifndef MARKOTWEET_MARKOV_H
@@ -12,7 +14,6 @@
 #include <string>
 #include <memory>
 #include <functional>
-#include <random>
 #include <regex>
 
 using Prefix = std::deque<std::string>;
@@ -21,9 +22,13 @@ using Suffixes = std::vector<std::string>;
 class Markov {
 
 private:
-    const int MAXGEN = 1024;
+    // Maximum number of words to generate
+    const int MAXGEN = 10000;
+    // New line is not a word and works as a delimiter
     const std::string NONWORD = "\n";
+    // Number of prefixes
     const int NPREF = 2;
+    // A map to hold our states
     std::map<Prefix, std::vector<string> > state_map;
 
 public:

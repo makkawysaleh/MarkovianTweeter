@@ -46,11 +46,23 @@ string TwitterClient::get_token(const string &key, const string &secret) {
     // Add our params and headers and make a POST request to exchange our authorization for a token
     string header = curl->post(token_url, params, headers);
 
-    return header;
+    json json_response = json::parse(header);
+
+    // Check if the response contains any errors!
+    auto has_errors = json_response.find("errors");
+
+    // If no errors then continue with the response
+    if (!(has_errors != json_response.end())) {
+        // Return a vector full of tweets
+        return header;
+
+    } else {
+        throw std::invalid_argument("Invalid credentials!");
+    }
 }
 
 // For a given Twitter handle return tweets from that person
-std::vector<string> TwitterClient::get_tweets(const string &handle, const string &token_header) {
+std::vector<string> TwitterClient::get_tweets(const string &username, const string &token_header) {
 
     // Convert token header to a JSON object
     json token_object = json::parse(token_header);
@@ -63,7 +75,7 @@ std::vector<string> TwitterClient::get_tweets(const string &handle, const string
 
     // The search URL to send our get request to
     string search_url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name="
-                        + handle + "&tweet_mode=extended&count=200";
+                        + username + "&tweet_mode=extended&count=200";
 
     // Construct our headers map
     map<string, string> headers;
@@ -81,17 +93,27 @@ std::vector<string> TwitterClient::get_tweets(const string &handle, const string
     // Parse our string as JSON
     json json_response = json::parse(response);
 
-    // A vector to hold tweet from a user
-    vector<string> tweets;
+    // Check if the response contains any errors!
+    auto has_errors = json_response.find("errors");
 
-    // Extract the text portion of the tweet and push it to our vector
-    for (auto &element : json_response) {
-        auto text = element.find("full_text");
-        tweets.push_back(*text);
+    // If no errors then continue with the reponse
+    if (!(has_errors != json_response.end())) {
+
+        // A vector to hold tweet from a user
+        std::vector<string> tweets;
+
+        // Extract the text portion of the tweet and push it to our vector
+        for (auto &element : json_response) {
+            auto text = element.find("full_text");
+            tweets.push_back(*text);
+        }
+        // Return a vector full of tweets
+        return tweets;
+
+    } else {
+        throw std::invalid_argument("No such user!");
     }
 
-    // Return a vector full of tweets
-    return tweets;
 }
 
 // Return a vector of words from the received tweets
@@ -104,7 +126,7 @@ std::vector<string> TwitterClient::make_word_list(std::vector<string> tweets) {
 
         // Add words while avoiding links.
         while (ss >> buf)
-            if (buf.find("http") == std::string::npos) {
+            if ((buf.find("http") == std::string::npos) and (buf.find("#") == std::string::npos)) {
                 words.push_back(buf);
             }
     }
