@@ -1,5 +1,6 @@
 //
 // Created by Dikshant Adhikari on 12/1/17.
+// This file contains method definitions for receiving tweets for a given user
 //
 
 #ifndef MARKOTWEET_TWITTER_CLIENT_H

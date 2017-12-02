@@ -1,3 +1,8 @@
+//
+// Created by Dikshant Adhikari on 12/1/17.
+// A file to run our program. Includes some utility functions to make life easier.
+//
+
 #include <iostream>
 #include <fstream>
 #include "twitter/twitter_client.h"
