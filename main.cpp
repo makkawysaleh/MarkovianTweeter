@@ -52,7 +52,7 @@ int main() {
         credentials.at(1);
     }
     catch (const std::out_of_range& e) {
-        cout << "Error! Please populate the credentials.txt file with proper values.";
+        cout << "Error! Please populate the credentials.txt file with proper values." << endl;
         exit(0);
     }
 
@@ -86,10 +86,10 @@ int main() {
                 cout << endl;
             }
             catch (const std::invalid_argument &e) {
-                cout << "No such user or user is private! Please try a new user!";
+                cout << "No such user or user is private! Please try a new user!" << endl;
             }
         }
     } catch(const::std::invalid_argument &e) {
-        cout << "Invalid credentials! Please check your credentials and please try again!";
+        cout << "Invalid credentials! Please check your credentials and please try again!" << endl;
     }
 }
