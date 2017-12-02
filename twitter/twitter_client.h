@@ -13,9 +13,14 @@ using std::string;
 class TwitterClient {
 
 public:
+    // Retrieve token from a twitter server
     std::string get_token(const string &key, const string &secret);
+
+    // Get tweets for a given user
     std::vector<string> get_tweets(const string &handle, const string &token);
-    std::vector<string> make_wordlist(std::vector<string> tweets);
+
+    // Make a vector of words from a user's past tweets
+    std::vector<string> make_word_list(std::vector<string> tweets);
 };
 
 #endif //MARKOTWEET_TWITTER_CLIENT_H

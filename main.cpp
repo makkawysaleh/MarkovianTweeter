@@ -13,7 +13,7 @@ int main() {
     auto *client = new TwitterClient();
     string token = client->get_token("IkNpQ7rLdd2XBpx6TlI7QdviF", "tSiFZvRLVdNARZ9JqYxoZcIGgaiHpNJWxwZE0tAlloxr7rk3Td");
     auto tweets = client->get_tweets("realdonaldtrump", token);
-    std::vector<string> words = client->make_wordlist(tweets);
+    std::vector<string> words = client->make_word_list(tweets);
 
     // Pass the vector of words into our markov generator
     Markov markov;

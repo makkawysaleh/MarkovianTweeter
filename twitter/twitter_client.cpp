@@ -94,7 +94,8 @@ std::vector<string> TwitterClient::get_tweets(const string &handle, const string
     return tweets;
 }
 
-std::vector<string> TwitterClient::make_wordlist(std::vector<string> tweets) {
+// Return a vector of words from the received tweets
+std::vector<string> TwitterClient::make_word_list(std::vector<string> tweets) {
 
     std::vector<string> words; // Create vector to hold our words
     for (auto &i : tweets) {
