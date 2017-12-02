@@ -25,7 +25,7 @@ class Markov {
 
 private:
     // Maximum number of words to generate
-    const int MAXGEN = 10000;
+    const int MAXGEN = 1000;
     // New line is not a word and works as a delimiter
     const std::string NONWORD = "\n";
     // Number of prefixes
