@@ -14,6 +14,13 @@ using std::string;
 class TwitterClient {
 
 public:
+
+    // Constructor
+    TwitterClient() = default;
+
+    // Destructor 
+    ~TwitterClient() = default;
+    
     // Retrieve token from a twitter server
     std::string get_token(const string &key, const string &secret);
 

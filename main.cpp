@@ -61,10 +61,13 @@ int main() {
         exit(0);
     }
 
+    // Instantiate a twitter client using RAII
+    std::unique_ptr<TwitterClient> client(new TwitterClient);
+        
     // Catch any exceptions due to invalid credentials or username
     try {
+
         // Exchange twitter api keys for a token
-        auto *client = new TwitterClient();
         string token = client->get_token(credentials[KEY], credentials[SECRET]);
 
         while (true) {
@@ -79,10 +82,12 @@ int main() {
                 // Get tweets for the given username
                 auto tweets = client->get_tweets(username, token);
                 std::vector<string> words = client->make_word_list(tweets);
+                
+                // Instantiate a markov generator using RAII
+                std::unique_ptr<Markov> markov(new Markov);
 
                 // Pass the vector of words into our markov generator
-                Markov markov;
-                std::vector<string> markov_words = markov.get_text(words);
+                std::vector<string> markov_words = markov->get_text(words);
 
                 // Get our markov generated words
                 for (auto &word : markov_words) {

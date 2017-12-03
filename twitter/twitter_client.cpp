@@ -40,13 +40,14 @@ string TwitterClient::get_token(const string &key, const string &secret) {
     headers["Content-type"] = "application/x-www-form-urlencoded;charset=UTF-8";
     headers["Authorization"] = authentication_token;
 
-    // Declare a new Curl object for making requests
+    // Instantiate a new Curl object for making requests using RAII
     // Curl is a wrapper class around the curl library (libcurl)
-    auto curl = new Curl();
+    std::unique_ptr<Curl> curl(new Curl);
 
     // Add our params and headers and make a POST request to exchange our authorization for a token
     string header = curl->post(token_url, params, headers);
-
+    
+    // Convert our string to a JSON object
     json json_response = json::parse(header);
 
     // Check if the response contains any errors!
@@ -84,13 +85,14 @@ std::vector<string> TwitterClient::get_tweets(const string &username, const stri
     // Populate the header map with our bearer token
     headers["Authorization"] = "Bearer " + token;
 
-    // Declare a new Curl object for making requests
+    // Instantiate a new Curl object for making requests using RAII
     // Curl is a wrapper class around the curl library (libcurl)
-    auto curl = new Curl();
+    std::unique_ptr<Curl> curl(new Curl);
 
     // Add header and make a get request
     string response = curl->get(search_url, headers);
 
+    // Check if response is empty
     if(response == "[]") {
         throw std::invalid_argument("No such user!");
     }
@@ -126,8 +128,11 @@ std::vector<string> TwitterClient::make_word_list(std::vector<string> tweets) {
 
     std::vector<string> words; // Create vector to hold our words
     for (auto &i : tweets) {
-        string buf; // Have a buffer string
-        std::stringstream ss(i); // Insert the string into a stream
+         // Have a buffer string
+        string buf;
+        
+        // Insert the string into a stream
+        std::stringstream ss(i);
 
         // Add words while avoiding links.
         while (ss >> buf)

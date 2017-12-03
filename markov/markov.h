@@ -34,8 +34,11 @@ private:
     std::map<Prefix, std::vector<string> > state_map;
 
 public:
+    // Constructor
     Markov() = default;
 
+    // Destructor
+    ~Markov() = default;
     // Add word to suffix deque, update prefix
     void add(Prefix &prefix, const string &s);
 
