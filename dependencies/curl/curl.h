@@ -27,10 +27,10 @@ public:
     CURLcode res;
 
     // Constructor
-    Curl();
+    Curl() = default;
 
     // Destructor
-    ~Curl();
+    ~Curl() = default;
 
     // GET method
     string get(string &url, map<string, string> &headers_map);
