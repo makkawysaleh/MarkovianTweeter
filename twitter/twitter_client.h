@@ -28,7 +28,7 @@ public:
     std::vector<string> get_tweets(const string &username, const string &token);
 
     // Make a vector of words from a user's past tweets
-    std::vector<string> make_word_list(std::vector<string> tweets);
+    std::vector<string> make_word_list(std::vector<string> &tweets);
 };
 
 #endif //MARKOTWEET_TWITTER_CLIENT_H
